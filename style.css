@@ -1,0 +1,75 @@
+.body {
+  -webkit-user-select: none; /* Safari */
+  -ms-user-select: none; /* IE 10 and IE 11 */
+  user-select: none; /* Standard syntax */
+
+    color: white;
+    background: radial-gradient(circle at 24.1% 68.8%, rgb(50, 50, 50) 0%, rgb(0, 0, 0) 99.4%);
+  /* Full height */
+  height: 100vh;
+
+  /* Center and scale the image nicely */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.col {
+    position: relative;
+    text-align: center;
+}
+
+.board {
+    display: flex;
+    align-items: center;
+    justify-content:center;
+    float: right;
+}
+
+.square {
+    width: 5rem;
+    height: 5rem;
+    position: relative;
+}
+
+.black {
+    box-shadow: inset 0 0 3px black;
+    background-color: #667188;
+    color: white;
+}
+
+.white {
+    box-shadow: inset 0 0 3px black;
+    background-color: #282f3f;;
+    color: black;
+}
+
+.piece {
+    height: 4rem;
+    width: 4rem;
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: calc(50% - 2rem);
+    transform: translateY(-50%);
+    /* border-radius: 100%; */
+}
+
+.move {
+    margin-top: 2px;
+    position: absolute;
+    left: 0px;
+    right: 0px
+}
+
+.playMove {
+    margin-top: 3px;
+}
+
+.rowNums {
+    margin-right: 3px
+}
+
+.boardParent {
+    display: flex;
+}
