@@ -21,10 +21,10 @@ document.addEventListener("dragend", function (event) {
 // When the draggable p element enters the droptarget, change the DIVS's border style
 document.addEventListener("dragenter", function (event) {
     if (event.target.className.includes("square")) {
-        event.target.style.border = "3px dotted red";
+        event.target.style.border = "3px solid white";
     } else if (event.target.className.includes("piece")) {
         setTimeout(() => {
-            event.target.parentNode.style.border = "3px dotted red";
+            event.target.parentNode.style.border = "3px solid white";
         }, 10);
     }
 });
