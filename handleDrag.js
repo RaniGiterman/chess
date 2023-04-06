@@ -1,10 +1,16 @@
 /* Events fired on the drag target */
+
 let parent;
 let child;
-// arr of {x, y}
-let legalMove = [];
+let disablePiece = false;
 
 document.addEventListener("dragstart", function (event) {
+    if (disablePiece) {
+        // game has ended.
+        event.preventDefault();
+        return;
+    }
+
     if (isWhiteTurn) {
         if (!event.target.src.includes("white")) {
             // tried picking black when white turn
@@ -89,12 +95,26 @@ document.addEventListener("drop", function (event) {
         img.classList.add("piece");
 
         // remove all last children
-        if (event.target.lastChild != null)
+        if (event.target.lastChild != null) {
+            if (event.target.lastChild.src.includes("king")) {
+                if (isWhiteTurn) {
+                    document.getElementById("gameWon").innerHTML = "White won!";
+                }
+                else {
+                    document.getElementById("gameWon").innerHTML = "Black won!";
+                }
+
+                document.getElementsByClassName("playAgain")[0].style.display = "inline";
+                disablePiece = true;
+            }
+
             event.target.removeChild(event.target.lastChild);
+        }
 
         // add new child
         event.target.appendChild(img);
         isWhiteTurn = !isWhiteTurn;
+
 
         // remove from original square
         try {
@@ -118,12 +138,26 @@ document.addEventListener("drop", function (event) {
 
         let parentX = event.target.parentNode;
 
+
+        if (event.target.src.includes("king")) {
+            if (isWhiteTurn) {
+                document.getElementById("gameWon").innerHTML = "White won!";
+            }
+            else {
+                document.getElementById("gameWon").innerHTML = "Black won!";
+            }
+
+            document.getElementsByClassName("playAgain")[0].style.display = "inline";
+            disablePiece = true;
+        }
+
         // remove all last children
         event.target.parentNode.removeChild(event.target);
 
         // add new child
         parentX.appendChild(img);
         isWhiteTurn = !isWhiteTurn;
+
 
         // remove from original square
         try {

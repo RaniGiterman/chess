@@ -30,70 +30,78 @@ for (let j = 0; j < 8; j++) {
 
 // (pawn = "P", knight = "N", bishop = "B", rook = "R", queen = "Q" and king = "K").
 
-let start_fen = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR";
+startPosition();
 
-let row = 0;
-let column = 0;
+function startPosition() {
+  let row = 0;
+  let column = 0;
+  let start_fen = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR";
+  cleanPieces();
+  isWhiteTurn = true;
+  disablePiece = false;
+  document.getElementsByClassName("playAgain")[0].style.display = "none";
+  document.getElementById("gameWon").innerHTML = "";
 
-for (let i = 0; i < start_fen.length; i++) {
-  const letter = start_fen[i];
-  if (letter === "r" || letter === "R") {
-    insertIMG(
-      letter === letter.toUpperCase()
-        ? `<img class="piece" draggable="true" src="./img/piece/rook_white.jpg"></img>`
-        : `<img class="piece" draggable="true" src="./img/piece/rook_black.jpg"></img>`,
-      row,
-      column
-    );
-  } else if (letter === "n" || letter === "N") {
-    insertIMG(
-      letter === letter.toUpperCase()
-        ? `<img class="piece" draggable="true" src="./img/piece/knight_white.jpg"></img>`
-        : `<img class="piece" draggable="true" src="./img/piece/knight_black.jpg"></img>`,
-      row,
-      column
-    );
-  } else if (letter === "b" || letter === "B") {
-    insertIMG(
-      letter === letter.toUpperCase()
-        ? `<img class="piece" draggable="true" src="./img/piece/bishop_white.jpg"></img>`
-        : `<img class="piece" draggable="true" src="./img/piece/bishop_black.jpg"></img>`,
-      row,
-      column
-    );
-  } else if (letter === "q" || letter === "Q") {
-    insertIMG(
-      letter === letter.toUpperCase()
-        ? `<img class="piece" draggable="true" src="./img/piece/queen_white.jpg"></img>`
-        : `<img class="piece" draggable="true" src="./img/piece/queen_black.jpg"></img>`,
-      row,
-      column
-    );
-  } else if (letter === "k" || letter === "K") {
-    insertIMG(
-      letter === letter.toUpperCase()
-        ? `<img class="piece" draggable="true" src="./img/piece/king_white.jpg"></img>`
-        : `<img class="piece" draggable="true" src="./img/piece/king_black.jpg"></img>`,
-      row,
-      column
-    );
-  } else if (letter === "/") {
-    column++;
-    start_fen = start_fen.slice(i + 1);
-    i = -1;
-    row = -1;
-  } else if (letter === "p" || letter === "P") {
-    insertIMG(
-      letter === letter.toUpperCase()
-        ? `<img class="piece" draggable="true" src="./img/piece/pawn_white.jpg"></img>`
-        : `<img class="piece" draggable="true" src="./img/piece/pawn_black.jpg"></img>`,
-      row,
-      column
-    );
-  } else if (!isNaN(letter)) {
-    row += parseInt(letter) - 1;
+  for (let i = 0; i < start_fen.length; i++) {
+    const letter = start_fen[i];
+    if (letter === "r" || letter === "R") {
+      insertIMG(
+        letter === letter.toUpperCase()
+          ? `<img class="piece" draggable="true" src="./img/piece/rook_white.jpg"></img>`
+          : `<img class="piece" draggable="true" src="./img/piece/rook_black.jpg"></img>`,
+        row,
+        column
+      );
+    } else if (letter === "n" || letter === "N") {
+      insertIMG(
+        letter === letter.toUpperCase()
+          ? `<img class="piece" draggable="true" src="./img/piece/knight_white.jpg"></img>`
+          : `<img class="piece" draggable="true" src="./img/piece/knight_black.jpg"></img>`,
+        row,
+        column
+      );
+    } else if (letter === "b" || letter === "B") {
+      insertIMG(
+        letter === letter.toUpperCase()
+          ? `<img class="piece" draggable="true" src="./img/piece/bishop_white.jpg"></img>`
+          : `<img class="piece" draggable="true" src="./img/piece/bishop_black.jpg"></img>`,
+        row,
+        column
+      );
+    } else if (letter === "q" || letter === "Q") {
+      insertIMG(
+        letter === letter.toUpperCase()
+          ? `<img class="piece" draggable="true" src="./img/piece/queen_white.jpg"></img>`
+          : `<img class="piece" draggable="true" src="./img/piece/queen_black.jpg"></img>`,
+        row,
+        column
+      );
+    } else if (letter === "k" || letter === "K") {
+      insertIMG(
+        letter === letter.toUpperCase()
+          ? `<img class="piece" draggable="true" src="./img/piece/king_white.jpg"></img>`
+          : `<img class="piece" draggable="true" src="./img/piece/king_black.jpg"></img>`,
+        row,
+        column
+      );
+    } else if (letter === "/") {
+      column++;
+      start_fen = start_fen.slice(i + 1);
+      i = -1;
+      row = -1;
+    } else if (letter === "p" || letter === "P") {
+      insertIMG(
+        letter === letter.toUpperCase()
+          ? `<img class="piece" draggable="true" src="./img/piece/pawn_white.jpg"></img>`
+          : `<img class="piece" draggable="true" src="./img/piece/pawn_black.jpg"></img>`,
+        row,
+        column
+      );
+    } else if (!isNaN(letter)) {
+      row += parseInt(letter) - 1;
+    }
+    row++;
   }
-  row++;
 }
 
 function insertIMG(img, row, column) {
@@ -146,6 +154,14 @@ function cleanLegalMoves() {
   for (let x = 0; x < board.children.length; x++) {
     for (let y = 0; y < board.children[x].children.length; y++) {
       board.children[x].children[y].style.boxShadow = "";
+    }
+  }
+}
+
+function cleanPieces() {
+  for (let x = 0; x < 8; x++) {
+    for (let y = 0; y < 8; y++) {
+      board.children[x].children[y].innerHTML = "";
     }
   }
 }
