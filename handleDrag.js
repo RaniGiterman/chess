@@ -1,10 +1,13 @@
 /* Events fired on the drag target */
 let parent;
 let child;
+// arr of {x, y}
+let legalMove = [];
 
 document.addEventListener("dragstart", function (event) {
     parent = event.target.parentElement;
     child = event.target;
+    calcLegalMove(parent);
 });
 
 document.addEventListener("drag", function (event) {
@@ -24,7 +27,11 @@ document.addEventListener("dragenter", function (event) {
         event.target.style.border = "3px solid white";
     } else if (event.target.className.includes("piece")) {
         setTimeout(() => {
-            event.target.parentNode.style.border = "3px solid white";
+            try {
+                event.target.parentNode.style.border = "3px solid white";
+            } catch (error) {
+
+            }
         }, 10);
     }
 });
@@ -54,6 +61,14 @@ document.addEventListener("dragleave", function (event) {
 document.addEventListener("drop", function (event) {
     if (event.target.className.includes("square")) {
         event.target.style.border = "";
+
+        // check if legal move
+        if (event.target.style.boxShadow != "red 0px 0px 10px inset") {
+            cleanLegalMoves();
+            return;
+        }
+
+        cleanLegalMoves();
         let img = document.createElement("img");
         img.src = event.dataTransfer.getData("text/plain");
         img.classList.add("piece");
@@ -66,9 +81,21 @@ document.addEventListener("drop", function (event) {
         event.target.appendChild(img);
 
         // remove from original square
-        parent.removeChild(child);
+        try {
+            parent.removeChild(child);
+        } catch (error) {
+
+        }
     } else if (event.target.className.includes("piece")) {
         event.target.parentNode.style.border = "";
+
+        // check if legal move
+        if (event.target.parentNode.style.boxShadow != "red 0px 0px 10px inset") {
+            cleanLegalMoves();
+            return;
+        }
+
+        cleanLegalMoves();
         let img = document.createElement("img");
         img.src = event.dataTransfer.getData("text/plain");
         img.classList.add("piece");
@@ -82,6 +109,13 @@ document.addEventListener("drop", function (event) {
         parentX.appendChild(img);
 
         // remove from original square
-        parent.removeChild(child);
+        try {
+            parent.removeChild(child);
+        } catch (error) {
+
+        }
+    } else {
+        cleanLegalMoves();
     }
+
 });

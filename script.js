@@ -141,6 +141,10 @@ function playMove() {
     grabbedPiece;
 }
 
-function dragOver(e) {
-  console.log(e);
+function cleanLegalMoves() {
+  for (let x = 0; x < board.children.length; x++) {
+    for (let y = 0; y < board.children[x].children.length; y++) {
+      board.children[x].children[y].style.boxShadow = "";
+    }
+  }
 }
