@@ -5,6 +5,20 @@ let child;
 let legalMove = [];
 
 document.addEventListener("dragstart", function (event) {
+    if (isWhiteTurn) {
+        if (!event.target.src.includes("white")) {
+            // tried picking black when white turn
+            event.preventDefault();
+            return;
+        }
+    } else {
+        if (event.target.src.includes("white")) {
+            // tried picking white when black turn
+            event.preventDefault();
+            return;
+        }
+    }
+
     parent = event.target.parentElement;
     child = event.target;
     calcLegalMove(parent);
@@ -16,13 +30,14 @@ document.addEventListener("drag", function (event) {
 
 // Output some text when finished dragging the p element and reset the opacity
 document.addEventListener("dragend", function (event) {
-    event.target.style.opacity = "1";
+    // event.target.style.opacity = "1";
 });
 
 /* Events fired on the drop target */
 
 // When the draggable p element enters the droptarget, change the DIVS's border style
 document.addEventListener("dragenter", function (event) {
+
     if (event.target.className.includes("square")) {
         event.target.style.border = "3px solid white";
     } else if (event.target.className.includes("piece")) {
@@ -79,6 +94,7 @@ document.addEventListener("drop", function (event) {
 
         // add new child
         event.target.appendChild(img);
+        isWhiteTurn = !isWhiteTurn;
 
         // remove from original square
         try {
@@ -107,6 +123,7 @@ document.addEventListener("drop", function (event) {
 
         // add new child
         parentX.appendChild(img);
+        isWhiteTurn = !isWhiteTurn;
 
         // remove from original square
         try {

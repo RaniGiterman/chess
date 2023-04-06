@@ -2,6 +2,7 @@
 const board = document.querySelector(".board");
 const rowNums = document.querySelector(".rowNums");
 const letter = "abcdefgh";
+let isWhiteTurn = true;
 
 for (let l = 8; l >= 1; l--) {
   const rowNum = document.createElement("div");
