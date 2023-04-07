@@ -30,8 +30,15 @@ function calcLegalMove(element) {
 function calcPawn(x, y) {
     // calc forward
     for (let i = 1; i <= 2; i++) {
-        if (i == 2 && y != 1 && y != 6)
-            break;
+        if (i == 2) {
+            if (isBlack) {
+                if (y != 1)
+                    break;
+            } else {
+                if (y != 6)
+                    break;
+            }
+        }
 
         let square;
         if (isBlack)

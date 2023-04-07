@@ -112,6 +112,20 @@ document.addEventListener("drop", function (event) {
         }
 
         // add new child
+        if (img.src.includes("pawn")) {
+            if (img.src.includes("black")) {
+                // if black pawn reached it's last rank
+                if (Array.from(event.target.parentNode.children).indexOf(event.target) == 7) {
+                    img.src = "./img/piece/queen_black.jpg";
+                }
+            } else {
+                // if white pawn reached it's last rank
+                if (Array.from(event.target.parentNode.children).indexOf(event.target) == 0) {
+                    img.src = "./img/piece/queen_white.jpg";
+                }
+            }
+        }
+
         event.target.appendChild(img);
         isWhiteTurn = !isWhiteTurn;
 
@@ -155,6 +169,20 @@ document.addEventListener("drop", function (event) {
         event.target.parentNode.removeChild(event.target);
 
         // add new child
+        if (img.src.includes("pawn")) {
+            if (img.src.includes("black")) {
+                // if black pawn reached it's last rank
+                if (Array.from(parentX.parentNode.children).indexOf(parentX) == 7) {
+                    img.src = "./img/piece/queen_black.jpg";
+                }
+            } else {
+                // if white pawn reached it's last rank
+                if (Array.from(parentX.parentNode.children).indexOf(parentX) == 0) {
+                    img.src = "./img/piece/queen_white.jpg";
+                }
+            }
+        }
+
         parentX.appendChild(img);
         isWhiteTurn = !isWhiteTurn;
 
