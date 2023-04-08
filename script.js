@@ -41,6 +41,11 @@ function startPosition() {
   disablePiece = false;
   document.getElementsByClassName("playAgain")[0].style.display = "none";
   document.getElementById("gameWon").innerHTML = "";
+  document.getElementById("opening").innerHTML = "Starting Position";
+  document.getElementById("move").innerHTML = "";
+  moveArr = "";
+  moveCount = 0;
+  funcCall = 0;
 
   for (let i = 0; i < start_fen.length; i++) {
     const letter = start_fen[i];
