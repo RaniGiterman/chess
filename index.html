@@ -7,14 +7,12 @@
     <meta name="description" content="" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" href="./style.css" />
-    <!-- CSS only -->
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css"
       rel="stylesheet"
       integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor"
       crossorigin="anonymous"
     />
-    <!-- JavaScript Bundle with Popper -->
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
@@ -22,66 +20,10 @@
     ></script>
   </head>
   <body class="body">
-    <div class="container">
+    <div class="container-fluid">
       <div class="row">
         <div class="col"></div>
         <div class="col">
-          <!-- <h1>Move from:</h1>
-          <span>row:</span>
-          <select class="currentRow">
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-            <option value="5">5</option>
-            <option value="6">6</option>
-            <option value="6">6</option>
-            <option value="7">7</option>
-            <option value="8">8</option>
-          </select>
-
-          <span>column:</span>
-          <select class="currentColumn">
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-            <option value="5">5</option>
-            <option value="6">6</option>
-            <option value="6">6</option>
-            <option value="7">7</option>
-            <option value="8">8</option>
-          </select>
-
-          <h1>To:</h1>
-          <span>row:</span>
-          <select class="moveToRow">
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-            <option value="5">5</option>
-            <option value="6">6</option>
-            <option value="6">6</option>
-            <option value="7">7</option>
-            <option value="8">8</option>
-          </select>
-          <span>column:</span>
-          <select class="moveToColumn">
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-            <option value="5">5</option>
-            <option value="6">6</option>
-            <option value="6">6</option>
-            <option value="7">7</option>
-            <option value="8">8</option>
-          </select>
-          <br />
-          <button onclick="playMove()" class="playMove">Play Move</button>
-          <br />
-          <br /> -->
           <div class="boardParent">
             <div class="rowNums"></div>
             <div class="board"></div>
@@ -98,11 +40,21 @@
             </button>
           </div>
         </div>
-        <div class="col"></div>
+
+        <div class="col">
+          <div class="moveLog">
+            <p id="opening">Starting Position</p>
+            <br />
+            <p id="move" style="overflow-y: auto; height: 75%"></p>
+          </div>
+        </div>
       </div>
     </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="./script.js" defer></script>
     <script src="./handleDrag.js" defer></script>
     <script src="./calcLegalMove.js" defer></script>
+    <script src="./calcAnnotation.js" defer></script>
   </body>
 </html>

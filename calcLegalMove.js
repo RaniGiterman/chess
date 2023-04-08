@@ -109,7 +109,7 @@ function calcQueen(x, y) {
 }
 
 function calcRook(x, y) {
-    console.log(x, y);
+    // console.log(x, y);
     // calc slide right
     for (let i = 1; i < 8; i++) {
         if (x + i > 7)
@@ -159,9 +159,9 @@ function calcRook(x, y) {
         if (y - i < 0)
             break;
 
-        console.log(y - i);
+        // console.log(y - i);
         let square = board.children[x].children[y - i];
-        console.log(square);
+        // console.log(square);
         if (square.firstChild) {
             if (square.firstChild.src.includes("black") && isBlack)
                 break;
@@ -394,7 +394,7 @@ function calcKnight(x, y) {
             }
         }
 
-        console.log(squareRight);
+        // console.log(squareRight);
         if (squareRight && squareRight.firstChild) {
             emptyRight = false;
             if ((squareRight.firstChild.src.includes("black") && !isBlack)) {
@@ -437,7 +437,7 @@ function calcKnight(x, y) {
             }
         }
 
-        console.log(squareRight);
+        // console.log(squareRight);
         if (squareRight && squareRight.firstChild) {
             emptyRight = false;
             if ((squareRight.firstChild.src.includes("black") && !isBlack)) {

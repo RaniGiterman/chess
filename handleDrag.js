@@ -3,8 +3,12 @@
 let parent;
 let child;
 let disablePiece = false;
+let startX;
+let startY;
 
 document.addEventListener("dragstart", function (event) {
+    startX = Array.from(event.target.parentNode.parentNode.children).indexOf(event.target.parentNode);
+    startY = Array.from(event.target.parentNode.parentNode.parentNode.children).indexOf(event.target.parentNode.parentNode);
     if (disablePiece) {
         // game has ended.
         event.preventDefault();
@@ -94,6 +98,9 @@ document.addEventListener("drop", function (event) {
         img.src = event.dataTransfer.getData("text/plain");
         img.classList.add("piece");
 
+        calcAnnotation(Array.from(event.target.parentNode.children).indexOf(event.target),
+            Array.from(event.target.parentNode.parentNode.children).indexOf(event.target.parentNode), event.target.parentNode.firstChild, img.src);
+
         // remove all last children
         if (event.target.lastChild != null) {
             if (event.target.lastChild.src.includes("king")) {
@@ -110,6 +117,7 @@ document.addEventListener("drop", function (event) {
 
             event.target.removeChild(event.target.lastChild);
         }
+
 
         // add new child
         if (img.src.includes("pawn")) {
@@ -165,6 +173,9 @@ document.addEventListener("drop", function (event) {
             disablePiece = true;
         }
 
+        calcAnnotation(Array.from(parentX.parentNode.children).indexOf(parentX),
+            Array.from(parentX.parentNode.parentNode.children).indexOf(parentX.parentNode), event.target.firstChild, img.src);
+
         // remove all last children
         event.target.parentNode.removeChild(event.target);
 
@@ -183,6 +194,7 @@ document.addEventListener("drop", function (event) {
             }
         }
 
+
         parentX.appendChild(img);
         isWhiteTurn = !isWhiteTurn;
 
@@ -198,3 +210,62 @@ document.addEventListener("drop", function (event) {
     }
 
 });
+
+function handleDragDrop(elem, event) {
+    elem.parentNode.style.border = "";
+
+    // check if legal move
+    if (elem.parentNode.style.boxShadow != "red 0px 0px 10px inset") {
+        cleanLegalMoves();
+        return;
+    }
+
+    cleanLegalMoves();
+    let img = document.createElement("img");
+    img.src = event.dataTransfer.getData("text/plain");
+    img.classList.add("piece");
+
+    let parentX = elem.parentNode;
+
+
+    if (elem.src.includes("king")) {
+        if (isWhiteTurn) {
+            document.getElementById("gameWon").innerHTML = "White won!";
+        }
+        else {
+            document.getElementById("gameWon").innerHTML = "Black won!";
+        }
+
+        document.getElementsByClassName("playAgain")[0].style.display = "inline";
+        disablePiece = true;
+    }
+
+    // remove all last children
+    elem.parentNode.removeChild(elem);
+
+    // add new child
+    if (img.src.includes("pawn")) {
+        if (img.src.includes("black")) {
+            // if black pawn reached it's last rank
+            if (Array.from(parentX.parentNode.children).indexOf(parentX) == 7) {
+                img.src = "./img/piece/queen_black.jpg";
+            }
+        } else {
+            // if white pawn reached it's last rank
+            if (Array.from(parentX.parentNode.children).indexOf(parentX) == 0) {
+                img.src = "./img/piece/queen_white.jpg";
+            }
+        }
+    }
+
+    parentX.appendChild(img);
+    isWhiteTurn = !isWhiteTurn;
+
+
+    // remove from original square
+    try {
+        parent.removeChild(child);
+    } catch (error) {
+
+    }
+}
