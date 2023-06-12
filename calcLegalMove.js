@@ -61,6 +61,10 @@ function calcPawn(x, y) {
     if (isBlack) {
         try {
             squareLeft = board.children[x - 1].children[y + 1];
+        } catch (error) {
+
+        }
+        try {
             squareRight = board.children[x + 1].children[y + 1];
         } catch (error) {
 
@@ -69,6 +73,10 @@ function calcPawn(x, y) {
     else {
         try {
             squareLeft = board.children[x - 1].children[y - 1];
+        } catch (error) {
+
+        }
+        try {
             squareRight = board.children[x + 1].children[y - 1];
         } catch (error) {
 

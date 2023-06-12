@@ -49,7 +49,7 @@ function calcAnnotation(x, y, hasChild, imgSrc) {
 
     if (funcCall % 2 == 0) {
         moveCount++;
-        moveArr += moveCount + "." + move + " ";
+        moveArr += moveCount + ". " + move + " ";
     } else {
         moveArr += move + "</br>";
     }
@@ -63,24 +63,22 @@ function calcAnnotation(x, y, hasChild, imgSrc) {
         Accept: "application/json",
     };
 
-    let data = {
-        "movetext": moveArr.replaceAll("</br>", " ")
-    };
+    let currentMoves = moveArr.replaceAll("</br>", " ");
+    if (currentMoves[currentMoves.length - 1] == " ")
+        currentMoves = currentMoves.substr(0, currentMoves.length - 1);
 
-    // openings ususally end around move 10, so I don't want to spam the fuck out of this poor api for no reason
-    if (moveCount <= 10)
-        axios({
-            url: "https://pchess.net/api/opening",
-            method: "POST",
-            data: JSON.stringify(data),
-            headers: configHeaders
-        })
-            .then(res => {
-                console.log(res);
-                if (res.data && res.data.length)
-                    document.getElementById("opening").innerHTML = res.data[0].name;
-            })
-            .catch(error => {
-                console.log(error);
-            });
+
+    // openings ususally end around move 20, and I don't want to spam the fuck out of this possible 20K loop
+    // TODO: Should I optimize this?
+    if (moveCount <= 20) {
+        for (let i = 0; i < OPENING_API.length; i++) {
+            // console.log(OPENING_API[i].moves, "|", currentMoves);
+            if (OPENING_API[i].moves == currentMoves) {
+                // console.log("FOUND!");
+                document.getElementById("opening").innerHTML = OPENING_API[i].name;
+                break;
+            }
+        }
+
+    }
 }
