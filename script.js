@@ -41,7 +41,7 @@ function startPosition() {
   disablePiece = false;
   document.getElementsByClassName("playAgain")[0].style.display = "none";
   document.getElementById("gameWon").innerHTML = "";
-  // document.getElementById("opening").innerHTML = "Starting Position";
+  document.getElementById("opening").innerHTML = "Starting Position";
   document.getElementById("move").innerHTML = "";
   moveArr = "";
   moveCount = 0;
