@@ -15,15 +15,22 @@ document.addEventListener("dragstart", function (event) {
         return;
     }
 
-    if (isWhiteTurn) {
-        if (!event.target.src.includes("white")) {
-            // tried picking black when white turn
-            event.preventDefault();
-            return;
+    if (!isPlayBot) {
+        if (isWhiteTurn) {
+            if (!event.target.src.includes("white")) {
+                // tried picking black when white turn
+                event.preventDefault();
+                return;
+            }
+        } else {
+            if (event.target.src.includes("white")) {
+                // tried picking white when black turn
+                event.preventDefault();
+                return;
+            }
         }
     } else {
-        if (event.target.src.includes("white")) {
-            // tried picking white when black turn
+        if (event.target.src.includes("black")) {
             event.preventDefault();
             return;
         }
@@ -134,6 +141,17 @@ document.addEventListener("drop", function (event) {
             }
         }
 
+        // insert to bitmap
+        let x = Array.from(event.target.parentNode.children).indexOf(event.target);
+        let y = Array.from(event.target.parentNode.parentNode.children).indexOf(event.target.parentNode);
+        insertBitMapIMG(x, y, img.src);
+
+        // remove from original bitmap square
+        x = Array.from(parent.parentNode.children).indexOf(parent);
+        y = Array.from(parent.parentNode.parentNode.children).indexOf(parent.parentNode);
+        removeBitMap(x, y);
+
+
         event.target.appendChild(img);
         isWhiteTurn = !isWhiteTurn;
 
@@ -198,6 +216,14 @@ document.addEventListener("drop", function (event) {
         parentX.appendChild(img);
         isWhiteTurn = !isWhiteTurn;
 
+        // insert to bitmap
+        let x = Array.from(parentX.parentNode.children).indexOf(parentX);
+        let y = Array.from(parentX.parentNode.parentNode.children).indexOf(parentX.parentNode);
+        insertBitMapIMG(x, y, img.src);
+        // remove from original bitmap square
+        x = Array.from(parent.parentNode.children).indexOf(parent);
+        y = Array.from(parent.parentNode.parentNode.children).indexOf(parent.parentNode);
+        removeBitMap(x, y);
 
         // remove from original square
         try {
@@ -209,6 +235,9 @@ document.addEventListener("drop", function (event) {
         cleanLegalMoves();
     }
 
+    console.log(bitMap);
+    if (isPlayBot && !disablePiece)
+        botMove();
 });
 
 function handleDragDrop(elem, event) {

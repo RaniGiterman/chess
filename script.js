@@ -3,6 +3,7 @@ const board = document.querySelector(".board");
 const rowNums = document.querySelector(".rowNums");
 const letter = "abcdefgh";
 let isWhiteTurn = true;
+let isPlayBot = true;
 
 for (let l = 8; l >= 1; l--) {
   const rowNum = document.createElement("div");
@@ -37,6 +38,7 @@ function startPosition() {
   let column = 0;
   let start_fen = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR";
   cleanPieces();
+  cleanBitMap();
   isWhiteTurn = true;
   disablePiece = false;
   document.getElementsByClassName("playAgain")[0].style.display = "none";
@@ -50,6 +52,7 @@ function startPosition() {
   for (let i = 0; i < start_fen.length; i++) {
     const letter = start_fen[i];
     if (letter === "r" || letter === "R") {
+      insertBitMap(row, column, letter);
       insertIMG(
         letter === letter.toUpperCase()
           ? `<img class="piece" draggable="true" src="./img/piece/rook_white.jpg"></img>`
@@ -58,6 +61,7 @@ function startPosition() {
         column
       );
     } else if (letter === "n" || letter === "N") {
+      insertBitMap(row, column, letter);
       insertIMG(
         letter === letter.toUpperCase()
           ? `<img class="piece" draggable="true" src="./img/piece/knight_white.jpg"></img>`
@@ -66,6 +70,7 @@ function startPosition() {
         column
       );
     } else if (letter === "b" || letter === "B") {
+      insertBitMap(row, column, letter);
       insertIMG(
         letter === letter.toUpperCase()
           ? `<img class="piece" draggable="true" src="./img/piece/bishop_white.jpg"></img>`
@@ -74,6 +79,7 @@ function startPosition() {
         column
       );
     } else if (letter === "q" || letter === "Q") {
+      insertBitMap(row, column, letter);
       insertIMG(
         letter === letter.toUpperCase()
           ? `<img class="piece" draggable="true" src="./img/piece/queen_white.jpg"></img>`
@@ -82,6 +88,7 @@ function startPosition() {
         column
       );
     } else if (letter === "k" || letter === "K") {
+      insertBitMap(row, column, letter);
       insertIMG(
         letter === letter.toUpperCase()
           ? `<img class="piece" draggable="true" src="./img/piece/king_white.jpg"></img>`
@@ -95,6 +102,7 @@ function startPosition() {
       i = -1;
       row = -1;
     } else if (letter === "p" || letter === "P") {
+      insertBitMap(row, column, letter);
       insertIMG(
         letter === letter.toUpperCase()
           ? `<img class="piece" draggable="true" src="./img/piece/pawn_white.jpg"></img>`
@@ -107,6 +115,7 @@ function startPosition() {
     }
     row++;
   }
+
 }
 
 function insertIMG(img, row, column) {
@@ -169,4 +178,16 @@ function cleanPieces() {
       board.children[x].children[y].innerHTML = "";
     }
   }
+}
+
+function switchGameMode() {
+  if (isPlayBot) {
+    document.getElementById("gameMode").innerHTML = "PLAYING AGAINST YOURSELF";
+    isPlayBot = false;
+  } else {
+    document.getElementById("gameMode").innerHTML = "PLAYING AGAINST THE COMPUTER";
+    isPlayBot = true;
+  }
+
+  startPosition();
 }

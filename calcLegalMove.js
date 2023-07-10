@@ -52,6 +52,7 @@ function calcPawn(x, y) {
         }
 
         // legal move!!
+        legalMoves.push({ square: square });
         square.style.boxShadow = "red 0px 0px 10px inset";
     }
 
@@ -92,8 +93,10 @@ function calcPawn(x, y) {
             enter = true;
 
         // legal move!!
-        if (!enter)
+        if (!enter) {
+            legalMoves.push({ square: squareLeft });
             squareLeft.style.boxShadow = "red 0px 0px 10px inset";
+        }
     }
 
     if (squareRight && squareRight.firstChild) {
@@ -105,8 +108,10 @@ function calcPawn(x, y) {
             enter = true;
 
         // legal move!!
-        if (!enter)
+        if (!enter) {
+            legalMoves.push({ square: squareRight });
             squareRight.style.boxShadow = "red 0px 0px 10px inset";
+        }
     }
 
 }
@@ -132,10 +137,12 @@ function calcRook(x, y) {
                 break;
 
 
+            legalMoves.push({ square: square });
             square.style.boxShadow = "red 0px 0px 10px inset";
             break;
         }
 
+        legalMoves.push({ square: square });
         square.style.boxShadow = "red 0px 0px 10px inset";
 
     }
@@ -154,10 +161,12 @@ function calcRook(x, y) {
                 break;
 
 
+            legalMoves.push({ square: square });
             square.style.boxShadow = "red 0px 0px 10px inset";
             break;
         }
 
+        legalMoves.push({ square: square });
         square.style.boxShadow = "red 0px 0px 10px inset";
 
     }
@@ -178,10 +187,12 @@ function calcRook(x, y) {
                 break;
 
 
+            legalMoves.push({ square: square });
             square.style.boxShadow = "red 0px 0px 10px inset";
             break;
         }
 
+        legalMoves.push({ square: square });
         square.style.boxShadow = "red 0px 0px 10px inset";
 
     }
@@ -200,10 +211,12 @@ function calcRook(x, y) {
                 break;
 
 
+            legalMoves.push({ square: square });
             square.style.boxShadow = "red 0px 0px 10px inset";
             break;
         }
 
+        legalMoves.push({ square: square });
         square.style.boxShadow = "red 0px 0px 10px inset";
 
     }
@@ -223,10 +236,12 @@ function calcBishop(x, y) {
                 break;
 
 
+            legalMoves.push({ square: square });
             square.style.boxShadow = "red 0px 0px 10px inset";
             break;
         }
 
+        legalMoves.push({ square: square });
         square.style.boxShadow = "red 0px 0px 10px inset";
     }
 
@@ -245,10 +260,12 @@ function calcBishop(x, y) {
                 break;
 
 
+            legalMoves.push({ square: square });
             square.style.boxShadow = "red 0px 0px 10px inset";
             break;
         }
 
+        legalMoves.push({ square: square });
         square.style.boxShadow = "red 0px 0px 10px inset";
     }
 
@@ -266,10 +283,12 @@ function calcBishop(x, y) {
                 break;
 
 
+            legalMoves.push({ square: square });
             square.style.boxShadow = "red 0px 0px 10px inset";
             break;
         }
 
+        legalMoves.push({ square: square });
         square.style.boxShadow = "red 0px 0px 10px inset";
     }
 
@@ -287,10 +306,12 @@ function calcBishop(x, y) {
                 break;
 
 
+            legalMoves.push({ square: square });
             square.style.boxShadow = "red 0px 0px 10px inset";
             break;
         }
 
+        legalMoves.push({ square: square });
         square.style.boxShadow = "red 0px 0px 10px inset";
     }
 
@@ -313,9 +334,11 @@ function calcKnight(x, y) {
         if (squareLeft && squareLeft.firstChild) {
             emptyLeft = false;
             if ((squareLeft.firstChild.src.includes("black") && !isBlack)) {
+                legalMoves.push({ square: squareLeft });
                 squareLeft.style.boxShadow = "red 0px 0px 10px inset";
             }
             if (squareLeft.firstChild.src.includes("white") && isBlack) {
+                legalMoves.push({ square: squareLeft });
                 squareLeft.style.boxShadow = "red 0px 0px 10px inset";
             }
         }
@@ -323,19 +346,25 @@ function calcKnight(x, y) {
         if (squareRight && squareRight.firstChild) {
             emptyRight = false;
             if ((squareRight.firstChild.src.includes("black") && !isBlack)) {
+                legalMoves.push({ square: squareRight });
                 squareRight.style.boxShadow = "red 0px 0px 10px inset";
             }
             if (squareRight.firstChild.src.includes("white") && isBlack) {
+                legalMoves.push({ square: squareRight });
                 squareRight.style.boxShadow = "red 0px 0px 10px inset";
             }
         }
 
 
-        if (squareLeft && emptyLeft)
+        if (squareLeft && emptyLeft) {
+            legalMoves.push({ square: squareLeft });
             squareLeft.style.boxShadow = "red 0px 0px 10px inset";
+        }
 
-        if (squareRight && emptyRight)
+        if (squareRight && emptyRight) {
+            legalMoves.push({ square: squareRight });
             squareRight.style.boxShadow = "red 0px 0px 10px inset";
+        }
     }
 
     if (y - 2 >= 0) {
@@ -354,9 +383,11 @@ function calcKnight(x, y) {
         if (squareLeft && squareLeft.firstChild) {
             emptyLeft = false;
             if ((squareLeft.firstChild.src.includes("black") && !isBlack)) {
+                legalMoves.push({ square: squareLeft });
                 squareLeft.style.boxShadow = "red 0px 0px 10px inset";
             }
             if (squareLeft.firstChild.src.includes("white") && isBlack) {
+                legalMoves.push({ square: squareLeft });
                 squareLeft.style.boxShadow = "red 0px 0px 10px inset";
             }
         }
@@ -364,19 +395,25 @@ function calcKnight(x, y) {
         if (squareRight && squareRight.firstChild) {
             emptyRight = false;
             if ((squareRight.firstChild.src.includes("black") && !isBlack)) {
+                legalMoves.push({ square: squareRight });
                 squareRight.style.boxShadow = "red 0px 0px 10px inset";
             }
             if (squareRight.firstChild.src.includes("white") && isBlack) {
+                legalMoves.push({ square: squareRight });
                 squareRight.style.boxShadow = "red 0px 0px 10px inset";
             }
         }
 
 
-        if (squareLeft && emptyLeft)
+        if (squareLeft && emptyLeft) {
+            legalMoves.push({ square: squareLeft });
             squareLeft.style.boxShadow = "red 0px 0px 10px inset";
+        }
 
-        if (squareRight && emptyRight)
+        if (squareRight && emptyRight) {
+            legalMoves.push({ square: squareRight });
             squareRight.style.boxShadow = "red 0px 0px 10px inset";
+        }
     }
 
     if (x + 2 <= 7) {
@@ -395,9 +432,11 @@ function calcKnight(x, y) {
         if (squareLeft && squareLeft.firstChild) {
             emptyLeft = false;
             if ((squareLeft.firstChild.src.includes("black") && !isBlack)) {
+                legalMoves.push({ square: squareLeft });
                 squareLeft.style.boxShadow = "red 0px 0px 10px inset";
             }
             if (squareLeft.firstChild.src.includes("white") && isBlack) {
+                legalMoves.push({ square: squareLeft });
                 squareLeft.style.boxShadow = "red 0px 0px 10px inset";
             }
         }
@@ -406,19 +445,25 @@ function calcKnight(x, y) {
         if (squareRight && squareRight.firstChild) {
             emptyRight = false;
             if ((squareRight.firstChild.src.includes("black") && !isBlack)) {
+                legalMoves.push({ square: squareRight });
                 squareRight.style.boxShadow = "red 0px 0px 10px inset";
             }
             if (squareRight.firstChild.src.includes("white") && isBlack) {
+                legalMoves.push({ square: squareRight });
                 squareRight.style.boxShadow = "red 0px 0px 10px inset";
             }
         }
 
 
-        if (squareLeft && emptyLeft)
+        if (squareLeft && emptyLeft) {
+            legalMoves.push({ square: squareLeft });
             squareLeft.style.boxShadow = "red 0px 0px 10px inset";
+        }
 
-        if (squareRight && emptyRight)
+        if (squareRight && emptyRight) {
+            legalMoves.push({ square: squareRight });
             squareRight.style.boxShadow = "red 0px 0px 10px inset";
+        }
     }
 
 
@@ -438,9 +483,11 @@ function calcKnight(x, y) {
         if (squareLeft && squareLeft.firstChild) {
             emptyLeft = false;
             if ((squareLeft.firstChild.src.includes("black") && !isBlack)) {
+                legalMoves.push({ square: squareLeft });
                 squareLeft.style.boxShadow = "red 0px 0px 10px inset";
             }
             if (squareLeft.firstChild.src.includes("white") && isBlack) {
+                legalMoves.push({ square: squareLeft });
                 squareLeft.style.boxShadow = "red 0px 0px 10px inset";
             }
         }
@@ -449,19 +496,25 @@ function calcKnight(x, y) {
         if (squareRight && squareRight.firstChild) {
             emptyRight = false;
             if ((squareRight.firstChild.src.includes("black") && !isBlack)) {
+                legalMoves.push({ square: squareRight });
                 squareRight.style.boxShadow = "red 0px 0px 10px inset";
             }
             if (squareRight.firstChild.src.includes("white") && isBlack) {
+                legalMoves.push({ square: squareRight });
                 squareRight.style.boxShadow = "red 0px 0px 10px inset";
             }
         }
 
 
-        if (squareLeft && emptyLeft)
+        if (squareLeft && emptyLeft) {
+            legalMoves.push({ square: squareLeft });
             squareLeft.style.boxShadow = "red 0px 0px 10px inset";
+        }
 
-        if (squareRight && emptyRight)
+        if (squareRight && emptyRight) {
+            legalMoves.push({ square: squareRight });
             squareRight.style.boxShadow = "red 0px 0px 10px inset";
+        }
     }
 
 }
@@ -496,18 +549,24 @@ function handle1SquareMove(x, y) {
     let square = board.children[x].children[y];
     let color = true;
     if (square.firstChild) {
-        if (square.firstChild.src.includes("black") && !isBlack)
+        if (square.firstChild.src.includes("black") && !isBlack) {
+            legalMoves.push({ square: square });
             square.style.boxShadow = "red 0px 0px 10px inset";
+        }
         else
             color = false;
 
 
-        if (square.firstChild.src.includes("white") && isBlack)
+        if (square.firstChild.src.includes("white") && isBlack) {
+            legalMoves.push({ square: square });
             square.style.boxShadow = "red 0px 0px 10px inset";
+        }
         else
             color = false;
     }
 
-    if (color)
+    if (color) {
+        legalMoves.push({ square: square });
         square.style.boxShadow = "red 0px 0px 10px inset";
+    }
 }

@@ -142,3 +142,13 @@
 	border-radius: 10px;
 	background-color: #555;
 }
+
+#gameMode {
+  position: fixed;
+  bottom: 2px;
+  cursor: pointer;
+}
+
+#gameMode:hover{
+  color:rgb(255, 0, 0);
+}
